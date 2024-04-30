@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
+using DesignPatterns.Iterator;
 using MementoPattern;
 using StatePattern;
 namespace DesignPatterns
@@ -8,8 +9,8 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            Memento();
-            State();
+
+            Iterator();
         }
 
         static void Memento()
@@ -42,6 +43,24 @@ namespace DesignPatterns
             canvas.currentTool = new BrushTool();
             canvas.MouseDown();
             canvas.MouseUp();
+        }
+
+        static void Iterator()
+        {
+            BrowseHistory history = new BrowseHistory();
+
+            history.Push("a");
+            history.Push("b");
+            history.Push("c");
+
+            IIterator iterator = history.CreateIterator();
+            while (iterator.HasNext())
+            {
+                var url = iterator.Current();
+                Console.WriteLine(url);
+                iterator.Next();
+            }
+
         }
     }
 
