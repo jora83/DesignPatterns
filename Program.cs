@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Security.Cryptography.X509Certificates;
 using DesignPatterns.Iterator;
+using DesignPatterns.Strategy;
 using MementoPattern;
 using StatePattern;
 namespace DesignPatterns
@@ -60,7 +61,15 @@ namespace DesignPatterns
                 Console.WriteLine(url);
                 iterator.Next();
             }
+        }
 
+        static void Strategy()
+        {
+            var ImageStorage = new ImageStorage(
+                new JpegCompressor(),
+                new BlackAndWhiteFilter());
+
+            ImageStorage.Store("a");
         }
     }
 
